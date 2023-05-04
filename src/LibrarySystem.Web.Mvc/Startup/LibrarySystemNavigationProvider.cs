@@ -23,9 +23,9 @@ namespace LibrarySystem.Web.Startup
                 )
                  .AddItem(
                     new MenuItemDefinition(
-                        PageNames.About,
-                        L("DEparment"),
-                        url: "DEpartment",
+                        PageNames.Department,
+                        L("Department"),
+                        url: "Departments",
                         icon: "fas fa-info-circle"
                     )
                 )

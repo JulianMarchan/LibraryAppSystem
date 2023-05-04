@@ -1,6 +1,11 @@
 ﻿@using LibrarySystem.Web.Models.Departments
 @model DepartmentListViewModel
 
+@section scripts{
+        <environment names="Development">
+            <script src="~/view-resources/Views/Departments/Index.js" asp-append-version="true"></script>
+        </environment>
+}
 <section class="content-header">
     <div class="container-fluid">
         <div class="row">
@@ -20,14 +25,27 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
+
                 <div class="card">
+                   
                     <div class="card-header">
+                        <div class="col-sm-6">
+                            <a class="btn bg-blue float-sm-right" asp-controller="Departments" asp-action="CreateOrEditDepartment" >
+                                <i class="fa fa-plus-square" ></i> 
+                                @L("CreateDepartment")
+                            </a>
+
+                            @*<a class="btn bg-blue float-sm-right" href="">
+                                <i class="fa fa-plus-square"></i>
+                                @L("CreateDepartment")
+                            </a>*@
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <!--Use for bulk actions-->
                             </div>
                             <div class="col-md-6">
-                                @await Html.PartialAsync("~/Views/Users/Index.AdvancedSearch.cshtml")
+                                @*@await Html.PartialAsync("~/Views/Users/Index.AdvancedSearch.cshtml")*@
                             </div>
                         </div>
                     </div>
@@ -36,15 +54,28 @@
                             <table id="UsersTable" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th></th>
-                                        <th>@L("UserName")</th>
-                                        <th>@L("FullName")</th>
-                                        <th>@L("EmailAddress")</th>
-                                        <th>@L("IsActive")</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
                                         <th style="width: 150px">@L("Actions")</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    @foreach (var department in Model.Departments)
+                                    {
+                                        <tr>
+                                            <td>@department.Id</td>
+                                            <td>@department.Name</td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm bg-secondary edit-dept" data-dept-id="@department.Id">
+                                                    <i class="fas fa-pencil-alt"></i> Edit
+                                                </button>
+                                                <button type="button" class="btn btn-sm bg-danger delete-dept" data-dept-id="@department.Id" data-user-name="@department.Name">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>

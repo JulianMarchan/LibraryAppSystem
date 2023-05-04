@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LibrarySystem.Departments.Dto
 {
+    [AutoMapTo(typeof(Department))]
     [AutoMapFrom(typeof(Department))]
     public class DepartmentDto : EntityDto<int>
     {
